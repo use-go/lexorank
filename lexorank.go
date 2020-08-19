@@ -60,6 +60,26 @@ func Rank(prev, next string) (string, bool) {
 	return "", false
 }
 
+func RanksMore(n int, prev, next string) ([]string, bool) {
+
+	sPrev, okPrev := ParseJira(prev)
+
+	sNext, okNext := ParseJira(next)
+
+	if okNext && okPrev {
+		pos, ok := Ranks(n, &sPrev, &sNext)
+		if ok {
+			result := []string{}
+			for _, vstr := range pos {
+				result = append(result, vstr.String())
+			}
+			return result, true
+		}
+	}
+
+	return nil, false
+}
+
 // Ranks arranges for there to be N ranks between `prev` and `next`
 // and returns them.  This is useful when re-ranking a group of
 // objects together at onces.
