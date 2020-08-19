@@ -1,0 +1,28 @@
+{
+    "version": "0.2",
+    "enabledLanguageIds": [
+        "go",
+        "javascript",
+        "markdown",
+        "plaintext",
+        "yml",
+        "toml"
+    ],
+    "enabled": true,
+    // words - list of words to be always considered correct
+    "words": [
+        "Jira",
+        "Lexo",
+        "lexorank",
+        "nexto",
+        "Position",
+        "prevo",
+        "stretchr"
+    ],
+    // flagWords - list of words to be always considered incorrect
+    // This is useful for offensive words and common spelling errors.
+    // For example "hte" should be "the"
+    "flagWords": [
+        "hte"
+    ]
+}

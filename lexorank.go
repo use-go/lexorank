@@ -6,30 +6,7 @@ package lexorank
 
 import (
 	"fmt"
-	"regexp"
 )
-
-const (
-	orderToByte  = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-	maxMultiRank = 61 //10 + 26 + 26 - 1
-
-	trailer = "UUUUUUUU"
-
-	minChar = byte('0')
-	maxChar = byte('z')
-)
-
-//Position Parse a Jira (Cloud?) lexorank field, which seems to look like:
-//    <bucket>|<base36>[:<base36>]
-//Position for a position
-type Position struct {
-	Bucket byte
-	Major  string
-	Minor  string // note this includes the ":" prefix
-}
-
-////    <bucket>|<base36>[:<base36>]
-var jiraRank = regexp.MustCompile(`^([012])\|([0-9a-z]+)(:[0-9a-z]*)?$`)
 
 func byteToOrder(b byte) byte {
 	n := _byteToOrder(b)
@@ -53,11 +30,7 @@ func _byteToOrder(b byte) byte {
 	}
 }
 
-func (p Position) String() string {
-	return fmt.Sprintf("%d|%s%s", p.Bucket, p.Major, p.Minor)
-}
-
-//ParseJira Parsing Jira
+//ParseJira Parsing a LexoRank String
 func ParseJira(rank string) (Position, bool) {
 	m := jiraRank.FindStringSubmatch(rank)
 	if m == nil {
@@ -71,9 +44,20 @@ func ParseJira(rank string) (Position, bool) {
 }
 
 //Rank of orders
-func Rank(pre, next string) (string, bool) {
+func Rank(prev, next string) (string, bool) {
 
-	return "", true
+	sPrev, okPrev := ParseJira(prev)
+
+	sNext, okNext := ParseJira(next)
+
+	if okNext && okPrev {
+		pos, ok := Ranks(1, &sPrev, &sNext)
+		if ok {
+			return pos[0].String(), true
+		}
+	}
+
+	return "", false
 }
 
 // Ranks arranges for there to be N ranks between `prev` and `next`

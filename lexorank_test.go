@@ -7,35 +7,7 @@ import (
 )
 
 func TestSuccessEmptyPrevEmptyNext(t *testing.T) {
-	rank, ok := Rank("", "")
-	assert.Equal(t, "U", rank)
+	rank, ok := Rank("0:47db1", "0:56f21")
+	t.Log("ranks:", rank)
 	assert.Equal(t, true, ok)
-}
-
-func TestSuccessEmptyPrev(t *testing.T) {
-
-}
-
-func TestSuccessEmptyNext(t *testing.T) {
-
-}
-
-func TestSuccessNewDigit(t *testing.T) {
-
-}
-
-func TestSuccessMidValue(t *testing.T) {
-
-}
-
-func TestSuccessNewDigitMidValue(t *testing.T) {
-
-}
-
-func TestFailSamePrevNext(t *testing.T) {
-
-}
-
-func TestFailAdjacent(t *testing.T) {
-
 }

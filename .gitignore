@@ -137,5 +137,7 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+.vscode/extensions.json
+.vscode/settings.json
 
 # End of https://www.gitignore.io/api/go,macos,linux,jetbrains+all

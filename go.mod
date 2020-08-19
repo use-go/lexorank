@@ -1,4 +1,4 @@
-module github.com/treelab/lexorank-go
+module github.com/use-go/lexorank
 
 go 1.14
 
